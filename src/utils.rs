@@ -17,12 +17,14 @@ pub fn convert_to_string(
 
     for i_index in i_first_index..=i_last_index {
         let c_temp = (dw_disk_data[i_index] / 256) as BYTE;
+        if c_temp == 0 { break; } // Added exit from the loop when a null character is found
         if c_temp != b' ' {
             pcsz_buf[i_position] = c_temp;
             i_position += 1;
         }
 
         let c_temp1 = (dw_disk_data[i_index] % 256) as BYTE;
+        if c_temp1 == 0 { break; } // Added exit from the loop when a null character is found
         if c_temp1 != b' ' {
             pcsz_buf[i_position] = c_temp1;
             i_position += 1;
