@@ -5,11 +5,11 @@ A Rust library for retrieving hard drive serial numbers on Windows. This library
 ## Usage
 
 ```rust
-use hard_drive_serial::HardDriveSerial;
+use simplehddserial::HardDriveSerial;
 
 fn main() -> Result<(), String> {
-    let mut hard_drive_serial = HardDriveSerial::new();
-    let serial_numbers = hard_drive_serial.get_serial_numbers()?;
+    let mut simplehddserial = HardDriveSerial::new();
+    let serial_numbers = simplehddserial.get_serial_numbers()?;
     
     for serial in serial_numbers {
         println!("Serial Number: {}", serial);
@@ -39,17 +39,17 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-hard-drive-serial = "0.1.0" // Replace with the actual version
+simplehddserial = "0.1.0" // Replace with the actual version
 ```
 
 ## Example
 
 ```rust
-use hard_drive_serial::HardDriveSerial;
+use simplehddserial::HardDriveSerial;
 
 fn main() -> Result<(), String> {
-    let mut hard_drive_serial = HardDriveSerial::new();
-    let serial_numbers = hard_drive_serial.get_serial_numbers()?;
+    let mut simplehddserial = HardDriveSerial::new();
+    let serial_numbers = simplehddserial.get_serial_numbers()?;
     
     println!("{:?}", serial_numbers); // Output: ["SERIAL1", "SERIAL2", ...]
 
