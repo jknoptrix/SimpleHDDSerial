@@ -47,7 +47,7 @@ impl HardDriveSerial {
 
             if let Some(serial) = get_drive_serial_with_admin_rights(h_physical_drive_ioctl, i_drive as BYTE) {
                 self.serial_numbers.push(serial);
-            }
+            } else { eprintln!("Error reading serial number for drive {}", i_drive); }
 
             unsafe { CloseHandle(h_physical_drive_ioctl); }
         }

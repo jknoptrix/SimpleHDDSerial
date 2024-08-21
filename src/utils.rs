@@ -173,7 +173,7 @@ pub fn extract_serial_from_identify_data(identify_data: &[BYTE]) -> io::Result<S
     let mut reader = io::Cursor::new(identify_data);
     let mut dw_disk_data: [DWORD; 256] = [0; 256];
     for i_ijk in 0..256 {
-        dw_disk_data[i_ijk] = reader.read_u16::<LittleEndian>()? as DWORD;
+        dw_disk_data[i_ijk] = reader.read_u16::<LittleEndian>()?.into();
     }
 
     let mut csz_serial_number: [BYTE; 1024] = [0; 1024];
@@ -182,6 +182,10 @@ pub fn extract_serial_from_identify_data(identify_data: &[BYTE]) -> io::Result<S
     let serial_number = String::from_utf8_lossy(&csz_serial_number)
         .trim_end_matches(char::from(0))
         .to_string();
+
+    if serial_number.is_empty() {
+        return Err(io::Error::new(io::ErrorKind::Other, "Failed to extract serial number"));
+    }
 
     Ok(serial_number)
 }
